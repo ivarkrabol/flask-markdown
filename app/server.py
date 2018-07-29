@@ -1,4 +1,4 @@
-from flask import Flask, abort
+from flask import Flask, abort, send_from_directory
 
 from app.md import MdLoader, NoMdAtPath, IllegalPath
 from app.markdown import markdown
@@ -8,12 +8,12 @@ loader = MdLoader()
 
 
 @flask_app.route('/')
-def index():
-    return "<h1>Hello, World!</h1>"
+def root():
+    return send_from_directory('../static', 'index.html')
 
 
 @flask_app.route('/<path:path>')
-def user(path):
+def serve_md(path):
     try:
         md = loader.get(path)
         return markdown(md.read())

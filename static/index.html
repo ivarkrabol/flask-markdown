@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>flask-markdown</title>
+    <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://v4-alpha.getbootstrap.com/examples/narrow-jumbotron/narrow-jumbotron.css" rel="stylesheet">
+    <script>
+        const loadArticle = (path, articleElement, headerElement) => {
+            fetch(path || 'index')
+                .then(res => res.text())
+                .then(text => {
+                    articleElement.innerHTML = text;
+                    articleElement.querySelectorAll('a').forEach(a => {
+                        const hash = a.getAttribute('href');
+                        a.setAttribute('href', (hash === 'index.md') ? '#' : `#${hash.substring(0, hash.lastIndexOf('.'))}`);
+                    });
+                    const h1 = articleElement.querySelector('h1');
+                    if (h1) {
+                        headerElement.innerHTML = h1.innerHTML;
+                        h1.parentNode.removeChild(h1);
+                    } else {
+                        headerElement.innerHTML = '';
+                    }
+                });
+        };
+
+        window.onload = () => {
+            const
+                articleElement = document.querySelector('article'),
+                headerElement = document.querySelector('header'),
+                hash = window.location.hash.substring(1) || '';
+            window.onpopstate = e => loadArticle(window.location.hash.substring(1), articleElement, headerElement);
+            history.replaceState({hash: hash}, document.title);
+            loadArticle(hash, articleElement, headerElement);
+        };
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <header class="display-3 border-bottom mb-4 pb-4">
+        </header>
+    </div>
+    <div class="content border-bottom mb-4 pb-4">
+        <article></article>
+    </div>
+    <footer class="small text-muted bg-light pt-3 pl-3 pr-3 pb-1  mt-3">
+    </footer>
+</div>
+</body>
+</html>
+
