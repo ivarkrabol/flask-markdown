@@ -4,5 +4,5 @@ Looks nice, but -- is this working though?
 
 - **Yes!**
 - *No!*
-
-Link to [other](other.md)
+- Link to [the Planet]{planetofalcrea}
+- Link to [other]{xianti}

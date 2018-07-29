@@ -1,10 +1,13 @@
 from flask import Flask, abort, send_from_directory
 
 from app.md import MdLoader, NoMdAtPath, IllegalPath
-from app.markdown import markdown
+from app.markdown import Markdown
+from app.ref import Refs
 
 flask_app = Flask(__name__)
 loader = MdLoader()
+refs = Refs(loader)
+markdown = Markdown(refs)
 
 
 @flask_app.route('/')
@@ -21,7 +24,7 @@ def serve_static(path):
 def serve_md(path):
     try:
         md = loader.get(path)
-        return markdown(md.read())
+        return markdown.convert(md.read())
     except NoMdAtPath:
         abort(404)
     except IllegalPath:

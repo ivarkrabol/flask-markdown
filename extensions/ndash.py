@@ -3,7 +3,7 @@ import re
 from markdown.extensions import Extension
 from markdown.postprocessors import Postprocessor
 
-NDASHPATTERN = re.compile(r'--')
+NDASH_PATTERN = re.compile(r'--')
 
 
 class NdashExtension(Extension):
@@ -13,4 +13,4 @@ class NdashExtension(Extension):
 
 class NdashPostprocessor(Postprocessor):
     def run(self, text):
-        return NDASHPATTERN.sub('&ndash;', text)
+        return NDASH_PATTERN.sub('&ndash;', text)

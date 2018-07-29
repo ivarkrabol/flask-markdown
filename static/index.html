@@ -6,7 +6,11 @@
     <link href="/static/bootstrap.min.css" rel="stylesheet">
     <link href="/static/narrow-jumbotron.css" rel="stylesheet">
     <script>
-        const loadArticle = (path, articleElement, headerElement) => {
+        const loadArticle = (pathAndHash, articleElement, headerElement) => {
+            const
+                hashIndex = pathAndHash.indexOf('#'),
+                path = hashIndex >= 0 ? pathAndHash.substring(0, hashIndex) : pathAndHash,
+                hash = hashIndex >= 0 ? pathAndHash.substring(pathAndHash.indexOf('#') + 1) : undefined;
             fetch(path || 'index')
                 .then(res => res.text())
                 .then(text => {
@@ -17,11 +21,14 @@
                         article = root.querySelector('article');
                     headerElement.innerHTML = header ? header.innerHTML : '';
                     articleElement.innerHTML = article ? article.innerHTML : '';
-
                     articleElement.querySelectorAll('a[href]').forEach(a => {
-                        const hash = a.getAttribute('href');
-                        a.setAttribute('href', (hash === 'index.md') ? '#' : `#${hash.substring(0, hash.lastIndexOf('.'))}`);
+                        const href = a.getAttribute('href');
+                        a.setAttribute('href', href === 'index.md' ? '#' : `#${href}`);
                     });
+                    if (hash) {
+                        const anchor = articleElement.querySelector(`a[name="${hash}"]`);
+                        if (anchor) anchor.scrollIntoView()
+                    }
                 });
         };
 
@@ -30,7 +37,10 @@
                 articleElement = document.querySelector('article'),
                 headerElement = document.querySelector('header'),
                 hash = window.location.hash.substring(1) || '';
-            window.onpopstate = e => loadArticle(window.location.hash.substring(1), articleElement, headerElement);
+            window.onpopstate = e => loadArticle(
+                window.location.hash.substring(1),
+                articleElement, headerElement
+            );
             history.replaceState({hash: hash}, document.title);
             loadArticle(hash, articleElement, headerElement);
         };

@@ -1,14 +1,15 @@
-from markdown import Markdown
+from markdown import Markdown as _Markdown
 
 from extensions import AnchorExtension, NdashExtension, WrapperExtension
 
 
-md = Markdown(extensions=[
-    AnchorExtension(),
-    NdashExtension(),
-    WrapperExtension(),
-])
+class Markdown:
+    def __init__(self, refs):
+        self._markdown = _Markdown(extensions=[
+            AnchorExtension(refs),
+            NdashExtension(),
+            WrapperExtension(),
+        ])
 
-
-def markdown(content):
-    return md.convert(content)
+    def convert(self, content: str) -> str:
+        return self._markdown.convert(content)
