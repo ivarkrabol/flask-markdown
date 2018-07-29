@@ -12,6 +12,11 @@ def root():
     return send_from_directory('../static', 'index.html')
 
 
+@flask_app.route('/static/<string:path>')
+def serve_static(path):
+    return send_from_directory('../static', path)
+
+
 @flask_app.route('/<path:path>')
 def serve_md(path):
     try:

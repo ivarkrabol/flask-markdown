@@ -3,25 +3,25 @@
 <head>
     <meta charset="utf-8">
     <title>flask-markdown</title>
-    <link href="https://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://v4-alpha.getbootstrap.com/examples/narrow-jumbotron/narrow-jumbotron.css" rel="stylesheet">
+    <link href="/static/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/narrow-jumbotron.css" rel="stylesheet">
     <script>
         const loadArticle = (path, articleElement, headerElement) => {
             fetch(path || 'index')
                 .then(res => res.text())
                 .then(text => {
-                    articleElement.innerHTML = text;
-                    articleElement.querySelectorAll('a').forEach(a => {
+                    const root = document.createElement('div');
+                    root.innerHTML = text;
+                    const
+                        header = root.querySelector('header'),
+                        article = root.querySelector('article');
+                    headerElement.innerHTML = header ? header.innerHTML : '';
+                    articleElement.innerHTML = article ? article.innerHTML : '';
+
+                    articleElement.querySelectorAll('a[href]').forEach(a => {
                         const hash = a.getAttribute('href');
                         a.setAttribute('href', (hash === 'index.md') ? '#' : `#${hash.substring(0, hash.lastIndexOf('.'))}`);
                     });
-                    const h1 = articleElement.querySelector('h1');
-                    if (h1) {
-                        headerElement.innerHTML = h1.innerHTML;
-                        h1.parentNode.removeChild(h1);
-                    } else {
-                        headerElement.innerHTML = '';
-                    }
                 });
         };
 

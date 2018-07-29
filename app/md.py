@@ -9,7 +9,8 @@ class MdLoader:
     def get(self, request_path):
         if request_path in self.cached:
             return self.cached[request_path]
-        md_path = os.path.normpath(os.path.join(self.base_path, '{}.md'.format(request_path)))
+        md_path = os.path.normpath(
+            os.path.join(self.base_path, '{}.md'.format(request_path).replace('/.md', '/index.md')))
         if md_path in self.cached:
             self.cached[request_path] = self.cached[md_path]
             return self.cached[md_path]
