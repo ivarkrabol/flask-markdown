@@ -5,5 +5,5 @@ Looks nice, but -- is this working though?
 
 - **Yes!**
 - *No!*
-- Link to [the Planet]{planetofalcrea}
-- Link to [other]{xianti}
+- Link to [the Planet](!planetofalcrea)
+- Link to [other](!xianti)
