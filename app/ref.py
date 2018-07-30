@@ -3,7 +3,7 @@ from typing import Callable
 
 from app.md import MdLoader, Md
 
-ANCHOR_PATTERN_STR = r'\{\{([a-z:.]+)\}\}'
+ANCHOR_PATTERN_STR = r'^\[([a-z:.]+)]:<>$'
 
 
 class Refs:
