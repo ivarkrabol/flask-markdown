@@ -26,7 +26,8 @@ class RefPattern(Pattern):
 
         try:
             href = '/{}'.format(self.refs.find(anchor))
-        except RefNotFound:
+        except RefNotFound as err:
+            print('RefNotFound: {}'.format(err))
             href = '/{}'.format(anchor)
 
         el = etree.Element('a')

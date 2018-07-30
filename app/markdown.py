@@ -1,6 +1,6 @@
 from markdown import Markdown as _Markdown
 
-from extensions import AnchorExtension, NdashExtension, WrapperExtension
+from extensions import AnchorExtension, NdashExtension, WrapperExtension, StripMdExtension, BootstrapifyExtension
 
 
 class Markdown:
@@ -9,6 +9,9 @@ class Markdown:
             AnchorExtension(refs),
             NdashExtension(),
             WrapperExtension(),
+            StripMdExtension(),
+            BootstrapifyExtension(),
+            'markdown.extensions.tables',
         ])
 
     def convert(self, content: str) -> str:

@@ -44,7 +44,6 @@ class MdLoader:
         if not md_path.startswith(self.base_path):
             raise IllegalPath(request_path)
         if not os.path.isfile(md_path):
-            print(md_path)
             raise NoMdAtPath(request_path)
         md = Md(md_path)
         self.cached[request_path] = md

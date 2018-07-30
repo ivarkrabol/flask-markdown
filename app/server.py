@@ -25,9 +25,11 @@ def serve_md(path):
     try:
         md = loader.get(path)
         return markdown.convert(md.read())
-    except NoMdAtPath:
+    except NoMdAtPath as err:
+        print('NoMdAtPath: {}'.format(err))
         abort(404)
-    except IllegalPath:
+    except IllegalPath as err:
+        print('IllegalPath: {}'.format(err))
         abort(403)
 
 
