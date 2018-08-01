@@ -3,7 +3,6 @@ from typing import List, Match
 
 from markdown import Markdown
 from markdown.extensions import Extension
-from markdown.inlinepatterns import Pattern
 from markdown.preprocessors import Preprocessor
 from markdown.util import etree
 
@@ -18,7 +17,6 @@ class AnchorExtension(Extension):
     def extendMarkdown(self, md: Markdown, md_globals: dict):
         md.preprocessors.add('ref', RefPreprocessor(md, self.refs), '_begin')
         md.preprocessors.add('anchor', AnchorPreprocessor(md), '>ref')
-        md.inlinePatterns.add('anchor', AnchorPattern(md), '_begin')
 
 
 class RefPreprocessor(Preprocessor):
@@ -58,27 +56,14 @@ class AnchorPreprocessor(Preprocessor):
 
     def run(self, lines: List[str]) -> List[str]:
         new_lines = []
-        i = 1
+        i = 0
         while i < len(lines):
-            line = lines[i]
-            new_lines.append(line)
-            m = self.pattern.match(line)
+            new_lines.append(lines[i])
+            m = self.pattern.match(lines[i])
             i += 1
             if m:
-                new_lines.append('{{' + m.group(1) + '}}')
+                new_lines.append(etree.tostring(etree.Element('a', {'name': m.group(1)}), encoding='unicode'))
                 while len(lines[i].strip()) == 0 and i < len(lines):
                     i += 1
 
         return new_lines
-
-
-class AnchorPattern(Pattern):
-    def __init__(self, markdown_instance: Markdown):
-        super().__init__(r'\{\{([a-z:.]+)\}\}', markdown_instance)
-
-    def handleMatch(self, m: Match) -> etree.Element:
-        name = m.group(2)
-
-        el = etree.Element('a')
-        el.set('name', name)
-        return el
