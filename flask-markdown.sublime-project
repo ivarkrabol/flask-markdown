@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Open in new tab",
+			"selector": "text.html.markdown",
+			"shell_cmd": "google-chrome \"http://127.0.0.1:5000/#/\\$(python -c \"import os.path; print(os.path.relpath('$file_path', '${project_path}/md'))\")/$file_base_name\"",
+		},
+		{
+			"name": "Run server & watch",
+			"shell_cmd": "gnome-terminal --geometry=110x25 --working-directory='$project_path' -e './run-and-watch.sh'",
+		},
+	],
+}

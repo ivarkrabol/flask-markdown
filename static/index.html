@@ -9,6 +9,7 @@
 
     <script>
         const loadArticle = (pathAndHash, articleElement, headerElement, breadcrumbsElement) => {
+            console.log(`Loading article '${pathAndHash}'`);
             const
                 hashIndex = pathAndHash.indexOf('#'),
                 path = hashIndex >= 0 ? pathAndHash.substring(0, hashIndex) : pathAndHash,
@@ -59,6 +60,14 @@
                 headerElement,
                 breadcrumbsElement
             );
+            document.onkeydown = e => {
+                if (e.ctrlKey && e.altKey && e.key === 'r') loadArticle(
+                    window.location.hash.substring(1),
+                    articleElement,
+                    headerElement,
+                    breadcrumbsElement
+                );
+            };
             history.replaceState({hash: hash}, document.title);
             loadArticle(hash, articleElement, headerElement, breadcrumbsElement);
         };

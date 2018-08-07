@@ -2,3 +2,4 @@
 **/__pycache__/
 md/*
 !md/index.md
+flask-markdown.sublime-workspace
