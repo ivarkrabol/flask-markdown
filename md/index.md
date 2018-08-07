@@ -1,9 +1,4 @@
-[alcrea]:<> "We're live, baby!"
-# What Is a Spell?
+#Alcrea
 
-Looks nice, but -- is this working though?
-
-- **Yes!**
-- *No!*
-- Link to [the Planet](!planetofalcrea)
-- Link to [other](!mahlian)
+- [The World of Alcrea](world/index)
+- [The Shadow's Approach](campaigns/shadows/shadows-approach.md)

@@ -1,18 +1,23 @@
 from markdown import Markdown as _Markdown
 
-from extensions import AnchorExtension, NdashExtension, WrapperExtension, StripMdExtension, BootstrapifyExtension
+from app.ref import Refs
+from extensions import AnchorExtension, BootstrapifyExtension, StripMdExtension, StructureExtension, \
+    SubstitutionExtension
 
 
 class Markdown:
-    def __init__(self, refs):
-        self._markdown = _Markdown(extensions=[
+    def __init__(self, refs: Refs):
+        self._substitution_extension: SubstitutionExtension = SubstitutionExtension()
+
+        self._markdown: _Markdown = _Markdown(extensions=[
+            # 'markdown.extensions.tables',
             AnchorExtension(refs),
-            NdashExtension(),
-            WrapperExtension(),
-            StripMdExtension(),
             BootstrapifyExtension(),
-            'markdown.extensions.tables',
+            StripMdExtension(),
+            StructureExtension(),
+            self._substitution_extension,
         ])
 
-    def convert(self, content: str) -> str:
+    def convert(self, content: str, context: dict = None) -> str:
+        self._substitution_extension.set_context(context)
         return self._markdown.convert(content)
