@@ -10,7 +10,7 @@ class Markdown:
         self._substitution_extension: SubstitutionExtension = SubstitutionExtension()
 
         self._markdown: _Markdown = _Markdown(extensions=[
-            # 'markdown.extensions.tables',
+            'markdown.extensions.tables',
             AnchorExtension(refs),
             BootstrapifyExtension(),
             StripMdExtension(),

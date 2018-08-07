@@ -1,9 +1,9 @@
 import re
-from typing import List, Pattern, Callable
+from typing import List, Pattern
 
 from markdown import Markdown
 from markdown.extensions import Extension
-from markdown.preprocessors import Preprocessor
+from markdown.postprocessors import Postprocessor
 
 
 class SubstitutionExtension(Extension):
@@ -13,8 +13,8 @@ class SubstitutionExtension(Extension):
 
     def extendMarkdown(self, md: Markdown, md_globals: dict) -> None:
         self._context_substitution = _ContextSubstitutionPreprocessor(md)
-        md.preprocessors.add('context', self._context_substitution, '_end')
-        md.preprocessors.add('special_characters', _SpecialCharacterSubstitutionPreprocessor(md, {
+        md.postprocessors.add('context', self._context_substitution, '_end')
+        md.postprocessors.add('special_characters', _SpecialCharacterSubstitutionPreprocessor(md, {
             '--': 'ndash'
         }), '_end')
 
@@ -23,19 +23,16 @@ class SubstitutionExtension(Extension):
             self._context_substitution.set_substitutions(context)
 
 
-class _SubstitutionPreprocessor(Preprocessor):
+class _SubstitutionPreprocessor(Postprocessor):
     def __init__(self, markdown_instance: Markdown):
         super().__init__(markdown_instance)
         self._substitutions: dict = {}
         self._any_pattern: Pattern = None
 
-    def run(self, lines: List[str]) -> List[str]:
+    def run(self, text: str) -> str:
         if self._substitutions is None:
-            return lines
-        new_lines = []
-        for line in lines:
-            new_lines.append(self._any_pattern.sub(lambda m: self._substitutions[m.group(1)], line))
-        return new_lines
+            return text
+        return self._any_pattern.sub(lambda m: self._substitutions[m.group(1)], text)
 
     def set_substitutions(self, substitutions: dict) -> None:
         self._substitutions = substitutions
