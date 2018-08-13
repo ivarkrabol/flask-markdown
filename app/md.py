@@ -36,19 +36,20 @@ class MdLoader:
     def get(self, request_path: str) -> Md:
         if request_path in self._cached:
             return self._cached[request_path]
-        md_path = os.path.normpath(
-            os.path.join(self._base_path, '{}.md'.format(request_path).replace('/.md', '/index.md')))
-        if md_path in self._cached:
-            self._cached[request_path] = self._cached[md_path]
-            return self._cached[md_path]
-        if not md_path.startswith(self._base_path):
+        request_path_norm = os.path.normpath(os.path.join(self._base_path, request_path))
+        if not request_path_norm.startswith(self._base_path):
             raise IllegalPath(request_path)
-        if not os.path.isfile(md_path):
-            raise NoMdAtPath(request_path)
-        md = Md(md_path)
-        self._cached[request_path] = md
-        self._cached[md_path] = md
-        return md
+        for suffix in ['.md', '/index.md']:
+            md_path = request_path_norm + suffix
+            if md_path in self._cached:
+                self._cached[request_path] = self._cached[md_path]
+                return self._cached[md_path]
+            if os.path.isfile(md_path):
+                md = Md(md_path)
+                self._cached[request_path] = md
+                self._cached[md_path] = md
+                return md
+        raise NoMdAtPath(request_path)
 
     def for_each_file(self, func: Callable[[str, Md], bool], excluding: list = None) -> None:
         for dir_path, _, filenames in os.walk(self._base_path):

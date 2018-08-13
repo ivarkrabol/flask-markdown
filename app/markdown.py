@@ -1,7 +1,7 @@
 from markdown import Markdown as _Markdown
 
 from app.ref import Refs
-from extensions import AnchorExtension, BootstrapifyExtension, StripMdExtension, StructureExtension, \
+from extensions import AnchorExtension, BootstrapifyExtension, FormatHrefsExtension, StructureExtension, \
     SubstitutionExtension
 
 
@@ -13,7 +13,7 @@ class Markdown:
             'markdown.extensions.tables',
             AnchorExtension(refs),
             BootstrapifyExtension(),
-            StripMdExtension(),
+            FormatHrefsExtension(),
             StructureExtension(),
             self._substitution_extension,
         ])

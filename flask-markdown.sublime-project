@@ -10,7 +10,7 @@
 		{
 			"name": "Open in new tab",
 			"selector": "text.html.markdown",
-			"shell_cmd": "google-chrome \"http://127.0.0.1:5000/#/\\$(python -c \"import os.path; print(os.path.relpath('$file_path', '${project_path}/md'))\")/$file_base_name\"",
+			"shell_cmd": "google-chrome \"http://127.0.0.1:5000/#/\\$(python -c \"import os.path; print(os.path.relpath('$file_path/$file_base_name', '${project_path}/md'))\")\"",
 		},
 		{
 			"name": "Run server & watch",
