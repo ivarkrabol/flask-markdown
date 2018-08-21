@@ -1,7 +1,7 @@
 from markdown import Markdown as _Markdown
 
-from app.ref import Refs
-from extensions import AnchorExtension, BootstrapifyExtension, FormatHrefsExtension, StructureExtension, \
+from flaskmarkdown.app.ref import Refs
+from flaskmarkdown.extensions import AnchorExtension, BootstrapifyExtension, FormatHrefsExtension, StructureExtension, \
     SubstitutionExtension
 
 

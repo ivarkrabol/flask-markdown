@@ -1,0 +1,2 @@
+include flaskmarkdown/md/index.md flaskmarkdown/md/error.md
+recursive-include flaskmarkdown/static *

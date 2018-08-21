@@ -1,6 +1,15 @@
 .idea/
-**/__pycache__/
+**/*.sublime-workspace
+
+*.pyc
+__pycache__/
+
 md/*
 !md/index.md
 !md/error.md
-flask-markdown.sublime-workspace
+
+instance/
+
+dist/
+build/
+*.egg-info/

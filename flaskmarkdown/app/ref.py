@@ -1,7 +1,7 @@
 import re
 from typing import Callable
 
-from app.md import MdLoader, Md
+from flaskmarkdown.app.md import MdLoader, Md
 
 ANCHOR_PATTERN_STR = r'^\[([a-z:.]+)]:<>$'
 

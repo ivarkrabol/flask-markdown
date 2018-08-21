@@ -6,7 +6,7 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 from markdown.util import etree
 
-from app.ref import Refs, ANCHOR_PATTERN_STR, RefNotFound
+from flaskmarkdown.app.ref import Refs, ANCHOR_PATTERN_STR, RefNotFound
 
 
 class AnchorExtension(Extension):
