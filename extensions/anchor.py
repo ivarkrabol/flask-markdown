@@ -16,7 +16,8 @@ class AnchorExtension(Extension):
 
     def extendMarkdown(self, md: Markdown, md_globals: dict) -> None:
         md.preprocessors.add('ref', _RefPreprocessor(md, self._refs), '_end')
-        md.preprocessors.add('anchor', _AnchorPreprocessor(md), '_end')
+        # Must occur before standard preprocessor reference
+        md.preprocessors.add('anchor', _AnchorPreprocessor(md), '<reference')
 
 
 class _RefPreprocessor(Preprocessor):
