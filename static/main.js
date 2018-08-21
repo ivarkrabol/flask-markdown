@@ -11,10 +11,8 @@ function extractArticleAndHeader(text) {
 function fixAnchorHrefsInElement(element, dir) {
     element.querySelectorAll('a[href]').forEach(a => {
         let href = a.getAttribute('href');
-        console.log(`Fix: ${href}`);
         if (href[0] !== '/') href = `${dir}/${href}`;
         a.setAttribute('href', `#${href}`);
-        console.log(`---> #${href}`);
     });
 }
 
