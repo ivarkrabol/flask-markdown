@@ -4,6 +4,13 @@
 *.pyc
 __pycache__/
 
+venv/
+scripts/activate
+scripts/run
+scripts/watch
+scripts/run-and-watch
+scripts/uninstall
+
 md/*
 !md/index.md
 !md/error.md
