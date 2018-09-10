@@ -1,22 +1,20 @@
+# Project files
 .idea/
 **/*.sublime-workspace
 
+# Cache files
 *.pyc
 __pycache__/
 
-venv/
-scripts/activate
-scripts/run
-scripts/watch
-scripts/run-and-watch
-scripts/uninstall
-
-md/*
+# External dependencies
+md/
 !md/index.md
 !md/error.md
 
+# Build/run files
+venv/
+activate
 instance/
-
 dist/
 build/
 *.egg-info/

@@ -1,0 +1,8 @@
+name: Run and watch
+cmd: make run-and-watch
+targets:
+  Open new tab:
+    cmd: make open-new-tab
+    args:
+      - FILE_ACTIVE={FILE_ACTIVE}
+      - PROJECT_PATH={PROJECT_PATH}
