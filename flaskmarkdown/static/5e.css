@@ -65,8 +65,97 @@ section h4 {
     'Hoefler Text', 'Bitstream Charter', Georgia, serif;
     font-size: 1rem;
     font-weight: bold;
+    font-style: italic;
     line-height: 1.5;
     margin: 0 .5rem 0 0;
+}
+
+section h4:after {
+    content: '.'
+}
+
+section blockquote {
+    position: relative;
+    margin: 1.3rem 0;
+    border: .15rem solid black;
+    border-left: none;
+    border-right: none;
+    padding: .3rem .75rem;
+    background: rgba(210, 230, 190, 1);
+    font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial, sans-serif;
+    font-size: .9rem;
+    line-height: 1.3;
+    box-shadow: 0 .3rem .6rem rgba(0, 0, 0, .7);
+}
+
+section blockquote:before,
+section blockquote:after,
+section blockquote > :first-child:before,
+section blockquote > :first-child:after {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 1rem;
+    height: .6rem;
+    box-sizing: content-box;
+}
+
+section blockquote:before,
+section blockquote:after {
+    bottom: -.69rem;
+    background: linear-gradient(to left bottom, black 45%, transparent 55%);
+}
+
+section blockquote > :first-child:before,
+section blockquote > :first-child:after {
+    top: -.69rem;
+    background: linear-gradient(to left top, black 45%, transparent 55%);
+    border-bottom: 1px solid black;
+}
+
+section blockquote:before,
+section blockquote > :first-child:before {
+    left: 0;
+}
+
+section blockquote:after,
+section blockquote > :first-child:after {
+    right: 0;
+}
+
+section blockquote:after {
+    background: linear-gradient(to right bottom, black 45%, transparent 55%);
+}
+
+section blockquote > :first-child:after {
+    background: linear-gradient(to right top, black 45%, transparent 55%);
+}
+
+section blockquote p,
+section h3 {
+    margin: 0;
+}
+
+section blockquote p + p {
+    text-indent: 1rem;
+}
+
+section blockquote h3,
+section blockquote h4 {
+    font-family: inherit;
+}
+
+section blockquote h3 {
+    margin-bottom: .3rem;
+    font-size: .9rem;
+    font-weight: bold;
+    font-variant: normal;
+    color: black;
+}
+
+section blockquote h4 {
+    font-size: inherit;
+    text-indent: 1rem;
 }
 
 section .table,
@@ -79,10 +168,9 @@ section .table tbody td {
 
 section .table tbody td,
 section .table thead th {
-    padding-top: .25em;
-    padding-bottom: .25em;
+    padding: .25em .75em;
 }
 
 section .table tbody tr:nth-child(odd) {
-    background: rgba(10, 100, 10, .15);
+    background: rgba(50, 200, 40, .12);
 }
